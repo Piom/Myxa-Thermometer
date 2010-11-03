@@ -1,0 +1,11 @@
+{
+  "daily": {
+    "message": "Daily"
+  },
+  "last_update":{
+  	"message":"Last update at "
+  },
+  "description_ext":{
+  	"message":"Extension to display the current temperature in Omsk city"
+  }
+}

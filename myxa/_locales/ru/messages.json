@@ -1,0 +1,15 @@
+{
+  "daily": {
+    "message": "Колебания температуры за день"
+  },
+  "last_update":{
+  	"message":"Информация обновлена - "
+  },
+  "description_ext":{
+  	"message":"Extension to display the current temperature in Omsk city"
+  },
+  "cur_t":{
+  	"message":"Температура воздуха на улице: "
+  }
+  
+}
