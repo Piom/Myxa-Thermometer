@@ -1,30 +1,40 @@
 <script>
 	var Therm = 0;
-	function refreshIcon(Therm) {
-		Therm = parseFloat(Therm) > 0 ? '+' + Therm : '-' + Therm;
-		chrome.browserAction.setBadgeText({
-			text : String(Therm)
-		});
-		if (parseFloat(Therm) > 0) {
+	function refreshIcon(val) {
+		if (parseFloat(val) > 0) {
+			val = '+' + val;
 			chrome.browserAction.setBadgeBackgroundColor({
 				color : [ 255, 0, 0, 255 ]
 			});
+		}else if (parseFloat(val)==0) {
+			chrome.browserAction.setBadgeBackgroundColor({
+				color : [ 77, 77,77, 255 ]
+			});
+		
 		} else {
+			val = '-' + val;
 			chrome.browserAction.setBadgeBackgroundColor({
 				color : [ 0, 0, 255, 255 ]
 			});
 		}
+		
 		var d = new Date();
-		chrome.browserAction.setTitle({title:chrome.i18n.getMessage("last_update")+ d.toLocaleString()});
+		text = chrome.i18n.getMessage("last_update")+ d.toLocaleString();
+		chrome.browserAction.setTitle({title:text});
+		chrome.browserAction.setBadgeText({
+			text : String(val)
+		});
+		console.log(text);
 	}
 	function getValue() {
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "http://dove.omsk.otpbank.ru/files/weather.js", true);
+		xhr.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4) {
-				eval(xhr.responseText);
-				if(typeof Therm != 'undefined'){
-					refreshIcon(Therm);
+				items = xhr.responseText.match(/[0-9.]+/);
+				if(items.length > 0){
+					refreshIcon(parseFloat(items[0]));
 				}
 			}
 		}
@@ -32,7 +42,7 @@
 	}
 	window.onload = function() {
 		getValue();
-		setInterval('getValue()', 60000);
+		setInterval(getValue, 10000);
 	}
 </script>
 
