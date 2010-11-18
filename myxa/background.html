@@ -4,7 +4,7 @@
 		if (parseFloat(val) > 0) {
 			val = '+' + val;
 			chrome.browserAction.setBadgeBackgroundColor({
-				color : [ 255, 0, 0, 255 ]
+				color : [ 255, 69, 0, 255 ]
 			});
 		}else if (parseFloat(val)==0) {
 			chrome.browserAction.setBadgeBackgroundColor({
@@ -12,9 +12,8 @@
 			});
 		
 		} else {
-			val = '-' + val;
 			chrome.browserAction.setBadgeBackgroundColor({
-				color : [ 0, 0, 255, 255 ]
+				color : [ 135, 206, 235, 255 ]
 			});
 		}
 		
@@ -32,7 +31,7 @@
 		xhr.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4) {
-				items = xhr.responseText.match(/[0-9.]+/);
+				items = xhr.responseText.match(/[0-9.\-]+/);
 				if(items.length > 0){
 					refreshIcon(parseFloat(items[0]));
 				}

@@ -1,7 +1,7 @@
 {
   "name": "Myxa Thermometer",
   "description": "__MSG_description_ext__",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "background_page": "background.html",
   "icons": { "16": "images/icon16.png",
            "48": "images/icon48.png",
