@@ -6,20 +6,22 @@
 			chrome.browserAction.setBadgeBackgroundColor({
 				color : [ 255, 69, 0, 255 ]
 			});
-		}else if (parseFloat(val)==0) {
+		} else if (parseFloat(val) == 0) {
 			chrome.browserAction.setBadgeBackgroundColor({
-				color : [ 77, 77,77, 255 ]
+				color : [ 77, 77, 77, 255 ]
 			});
-		
+
 		} else {
 			chrome.browserAction.setBadgeBackgroundColor({
 				color : [ 135, 206, 235, 255 ]
 			});
 		}
-		
+
 		var d = new Date();
-		text = chrome.i18n.getMessage("last_update")+ d.toLocaleString();
-		chrome.browserAction.setTitle({title:text});
+		text = chrome.i18n.getMessage("last_update") + d.toLocaleString();
+		chrome.browserAction.setTitle({
+			title : text
+		});
 		chrome.browserAction.setBadgeText({
 			text : String(val)
 		});
@@ -28,11 +30,12 @@
 	function getValue() {
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "http://dove.omsk.otpbank.ru/files/weather.js", true);
-		xhr.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
+		xhr.setRequestHeader("If-Modified-Since",
+				"Sat, 1 Jan 2000 00:00:00 GMT");
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4) {
 				items = xhr.responseText.match(/[0-9.\-]+/);
-				if(items.length > 0){
+				if (items.length > 0) {
 					refreshIcon(parseFloat(items[0]));
 				}
 			}
